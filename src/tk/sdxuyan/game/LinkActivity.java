@@ -1,4 +1,6 @@
-package com.xuyan.happylink;
+package tk.sdxuyan.game;
+
+import com.xuyan.happylink.R;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;

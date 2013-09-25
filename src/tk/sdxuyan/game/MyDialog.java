@@ -1,4 +1,6 @@
-package com.xuyan.happylink;
+package tk.sdxuyan.game;
+
+import com.xuyan.happylink.R;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

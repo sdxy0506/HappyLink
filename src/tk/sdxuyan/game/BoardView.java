@@ -1,8 +1,10 @@
-package com.xuyan.happylink;
+package tk.sdxuyan.game;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import com.xuyan.happylink.R;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

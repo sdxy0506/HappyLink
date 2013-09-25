@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg02" >
+
+    <ProgressBar
+        android:id="@+id/atimer"
+        style="@style/ProgressBar_Mini"
+        android:layout_width="match_parent"
+        android:layout_height="20dip"
+        android:layout_marginTop="10dip" />
+
+    <tk.sdxuyan.game.MyView
+        android:id="@+id/amyview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="30dip"
+        android:layout_marginBottom="50dip" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="50dip"
+        android:orientation="horizontal"
+        android:gravity="bottom" >
+
+        <ImageButton
+            android:id="@+id/arefresh_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/refresh"
+            android:contentDescription="@string/app_name" />
+
+        <TextView
+            android:id="@+id/atext_refresh_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:background="@drawable/shape"
+            android:textColor="@android:color/white"
+            android:textSize="15sp" />
+
+        <ImageButton
+            android:id="@+id/atip_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/light_bulb"
+            android:contentDescription="@string/app_name" />
+
+        <TextView
+            android:id="@+id/atext_tip_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:background="@drawable/shape"
+            android:textColor="@android:color/white"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+</FrameLayout>
