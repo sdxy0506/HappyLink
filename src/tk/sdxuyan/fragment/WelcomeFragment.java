@@ -1,5 +1,7 @@
 package tk.sdxuyan.fragment;
 
+import tk.sdxuyan.slidemenudemo.FragmentChangeActivity;
+
 import com.xuyan.happylink.R;
 
 import android.os.Bundle;
@@ -30,10 +32,13 @@ public class WelcomeFragment extends Fragment {
 
 			@Override
 			public void onClick(View v) {
-				GameFragment fragment = new GameFragment();
-				getActivity().getSupportFragmentManager().beginTransaction()
-						.replace(R.id.content_frame, fragment).commit();
-				// getSlidingMenu().showContent();
+				if (getActivity() == null)
+					return;
+
+				if (getActivity() instanceof FragmentChangeActivity) {
+					FragmentChangeActivity fca = (FragmentChangeActivity) getActivity();
+					fca.switchContent(new GameFragment());
+				}
 
 			}
 		});

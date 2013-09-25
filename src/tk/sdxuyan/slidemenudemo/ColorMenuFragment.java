@@ -1,6 +1,7 @@
 package tk.sdxuyan.slidemenudemo;
 
 import tk.sdxuyan.fragment.GameFragment;
+import tk.sdxuyan.fragment.WelcomeFragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
@@ -36,7 +37,7 @@ public class ColorMenuFragment extends ListFragment {
 		Fragment newContent = null;
 		switch (position) {
 		case 0:
-			newContent = new ColorFragment(R.color.red);
+			newContent = new WelcomeFragment();
 			break;
 		case 1:
 			newContent = new GameFragment();
