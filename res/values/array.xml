@@ -2,11 +2,10 @@
 <resources>
 
     <string-array name="color_names">
-        <item>Red</item>
-        <item>Green</item>
-        <item>Blue</item>
-        <item>White</item>
-        <item>Black</item>
+        <item>开始新游戏</item>
+        <item>难度选择</item>
+        <item>游戏记录</item>
+        <item>关于作者</item>
     </string-array>
 
 </resources>

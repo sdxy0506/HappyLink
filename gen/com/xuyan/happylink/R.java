@@ -1037,7 +1037,7 @@ containing a value of this type.
         public static final int bg01=0x7f020070;
         public static final int bg02=0x7f020071;
         public static final int bg03=0x7f020072;
-        public static final int bg1=0x7f020073;
+        public static final int bg_goal=0x7f020073;
         public static final int buttons_bg20=0x7f020074;
         public static final int buttons_next=0x7f020075;
         public static final int buttons_play=0x7f020076;
@@ -1072,7 +1072,8 @@ containing a value of this type.
         public static final int refresh=0x7f020093;
         public static final int shadow=0x7f020094;
         public static final int shape=0x7f020095;
-        public static final int title=0x7f020096;
+        public static final int start_game=0x7f020096;
+        public static final int title=0x7f020097;
     }
     public static final class id {
         public static final int abs__action_bar=0x7f050025;
@@ -1114,22 +1115,23 @@ containing a value of this type.
         public static final int abs__textButton=0x7f050018;
         public static final int abs__title=0x7f050020;
         public static final int abs__up=0x7f05000b;
-        public static final int action_settings=0x7f050053;
-        public static final int amyview=0x7f050049;
-        public static final int aplay_btn=0x7f050051;
-        public static final int arefresh_btn=0x7f05004a;
-        public static final int atext_refresh_num=0x7f05004b;
-        public static final int atext_tip_num=0x7f05004d;
-        public static final int atimer=0x7f050048;
-        public static final int atip_btn=0x7f05004c;
-        public static final int atitle_img=0x7f050052;
+        public static final int action_settings=0x7f050057;
+        public static final int amyview=0x7f05004c;
+        public static final int aplay_btn=0x7f050054;
+        public static final int arefresh_btn=0x7f05004d;
+        public static final int atext_refresh_num=0x7f05004e;
+        public static final int atext_tip_num=0x7f050050;
+        public static final int atimer=0x7f050049;
+        public static final int atip_btn=0x7f05004f;
+        public static final int atitle_img=0x7f050055;
         public static final int content_frame=0x7f05003f;
         public static final int disableHome=0x7f050009;
         public static final int edit_query=0x7f05002b;
         public static final int fullscreen=0x7f050013;
-        public static final int github=0x7f050054;
+        public static final int github=0x7f050058;
         public static final int homeAsUp=0x7f050006;
         public static final int image=0x7f050046;
+        public static final int imageView1=0x7f050048;
         public static final int left=0x7f050010;
         public static final int listMode=0x7f050002;
         public static final int margin=0x7f050012;
@@ -1142,13 +1144,13 @@ containing a value of this type.
         public static final int refresh_btn=0x7f05003b;
         public static final int replay_imgbtn=0x7f050044;
         public static final int right=0x7f050011;
-        public static final int row_icon=0x7f05004e;
-        public static final int row_title=0x7f05004f;
+        public static final int row_icon=0x7f050051;
+        public static final int row_title=0x7f050052;
         public static final int selected_view=0x7f050014;
         public static final int showCustom=0x7f050008;
         public static final int showHome=0x7f050005;
         public static final int showTitle=0x7f050007;
-        public static final int slidingmenumain=0x7f050050;
+        public static final int slidingmenumain=0x7f050053;
         public static final int tabMode=0x7f050003;
         public static final int text_message=0x7f050041;
         public static final int text_refresh_num=0x7f05003c;
@@ -1157,7 +1159,10 @@ containing a value of this type.
         public static final int timer=0x7f050039;
         public static final int tip_btn=0x7f05003d;
         public static final int title_img=0x7f050038;
+        public static final int tv_goal=0x7f05004b;
+        public static final int tv_level=0x7f05004a;
         public static final int useLogo=0x7f050004;
+        public static final int version=0x7f050056;
         public static final int view_dialog=0x7f050040;
         public static final int wrap_content=0x7f050000;
     }

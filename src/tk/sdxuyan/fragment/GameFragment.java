@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -44,9 +45,9 @@ public class GameFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// getActivity().requestWindowFeature(Window.FEATURE_NO_TITLE);
-		// getActivity().getWindow().setFlags(
-		// WindowManager.LayoutParams.FLAG_FULLSCREEN,
-		// WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		getActivity().getWindow().setFlags(
+				WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		gameView = inflater.inflate(R.layout.play_game, container, false);
 		init();
 		return gameView;
@@ -259,6 +260,19 @@ public class GameFragment extends Fragment {
 		player_play.pause();
 		player_init.pause();
 		isPause = true;
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		isPause = false;
+		if (isPlay) {
+			player_play.start();
+			thread = new MyThread();
+			thread.start();
+		} else {
+			player_init.start();
+		}
 	}
 
 }

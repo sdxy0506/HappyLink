@@ -7,20 +7,30 @@
 
     <ImageButton
         android:id="@+id/aplay_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dip"
+        android:layout_height="60dip"
         android:layout_centerInParent="true"
-        android:background="@drawable/bg1"
+        android:background="@drawable/start_game"
         android:contentDescription="@string/app_name" />
 
     <ImageView
         android:id="@+id/atitle_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/play_btn"
+        android:layout_above="@id/aplay_btn"
         android:layout_centerHorizontal="true"
         android:contentDescription="@string/app_name"
         android:paddingTop="10dip"
         android:src="@drawable/title" />
+
+    <TextView
+        android:id="@+id/version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
+        android:textColor="#a1a3a6"
+        android:textSize="18sp" />
 
 </RelativeLayout>
