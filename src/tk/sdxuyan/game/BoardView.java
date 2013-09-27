@@ -115,6 +115,9 @@ public class BoardView extends View {
 		loadBitmaps(18, r.getDrawable(R.drawable.fish_18));
 	}
 
+	/**
+	 * 初始化音乐特效
+	 * */
 	public static void initSound(Context context) {
 		soundPlay = new SoundPlay();
 		soundPlay.initSounds(context);

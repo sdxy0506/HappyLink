@@ -1,8 +1,10 @@
 package tk.sdxuyan.fragment;
 
 import tk.sdxuyan.slidemenudemo.FragmentChangeActivity;
+import tk.sdxuyan.tool.Music;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,17 +16,19 @@ import android.widget.TextView;
 
 import com.xuyan.happylink.R;
 
-public class WelcomeFragment extends Fragment {
+public class WelcomeFragment extends Fragment implements Music {
 
 	private View welcomeView;
 	private ImageButton btnPlay;
 	private TextView version;
+	private MediaPlayer play_welcome;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		welcomeView = inflater.inflate(R.layout.welcome, container, false);
 		init();
+		setMusic();
 		return welcomeView;
 	}
 
@@ -55,4 +59,18 @@ public class WelcomeFragment extends Fragment {
 			}
 		});
 	}
+
+	@Override
+	public void onDestroyView() {
+		play_welcome.stop();
+		super.onDestroyView();
+	}
+
+	@Override
+	public void setMusic() {
+		play_welcome = MediaPlayer.create(getActivity(), R.raw.bg);
+		play_welcome.setLooping(true);// 设置循环播放
+		play_welcome.start();
+	}
+
 }
