@@ -9,14 +9,12 @@ import tk.sdxuyan.game.RefreshGameView;
 import tk.sdxuyan.tool.Contants;
 import tk.sdxuyan.tool.Music;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
-import android.text.format.Time;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -163,10 +161,8 @@ public class GameFragment extends Fragment implements Music {
 				Message m = new Message();
 				if (isStop && !isPause)
 					m.what = 0;
-				// mHandler.sendMessage(m);
 				else {
 					m.what = 2;
-					// mHandler.sendMessage(m);
 				}
 				mHandler.sendMessage(m);
 			}
