@@ -5,7 +5,7 @@ import java.util.TimerTask;
 
 import tk.sdxuyan.game.BoardView;
 import tk.sdxuyan.game.MyView;
-import tk.sdxuyan.game.RefreshGameView;
+import tk.sdxuyan.game.RefreshGameState;
 import tk.sdxuyan.tool.Contants;
 import tk.sdxuyan.tool.Music;
 import android.app.AlertDialog;
@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,7 +23,6 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.xuyan.happylink.R;
 
@@ -104,6 +104,7 @@ public class GameFragment extends Fragment implements Music {
 		leftTime = myview.getTotalTime();
 		RefreshNum = myview.getRefreshNum();
 		TipNum = 1000;
+		progress.setMax(leftTime);
 		progress.setProgress(leftTime);
 		startTimer();
 		myview.play();
@@ -138,41 +139,6 @@ public class GameFragment extends Fragment implements Music {
 
 	};
 
-	private class MyThread extends Thread {
-		public void run() {
-			while (leftTime >= 0 && !isStop) {
-
-				if (myview.win())
-					isStop = true;
-				else {
-					if (myview.die()) {
-						Message m = new Message();
-						m.what = 3;
-						mHandler.sendMessage(m);
-					}
-					try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					Message m = new Message();
-					m.what = 1;
-					mHandler.sendMessage(m);
-					leftTime--;
-				}
-			}
-			// if (!isPause) {
-			// Message m = new Message();
-			// if (isStop && !isPause)
-			// m.what = 0;
-			// else {
-			// m.what = 2;
-			// }
-			// mHandler.sendMessage(m);
-			// }
-		}
-	}
-
 	private void myDialog(View v, String state, int time, int msg) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setCancelable(false);
@@ -189,11 +155,6 @@ public class GameFragment extends Fragment implements Music {
 							leftTime = myview.getTotalTime();
 							RefreshNum = myview.getRefreshNum();
 							TipNum = myview.getTipNum();
-							// thread = new MyThread();
-							// thread.start();
-							// Message m = new Message();
-							// m.what = 4;
-							// mHandler.sendMessage(m);
 						}
 					});
 		} else {
@@ -208,11 +169,6 @@ public class GameFragment extends Fragment implements Music {
 							leftTime = myview.getTotalTime();
 							RefreshNum = myview.getRefreshNum();
 							TipNum = myview.getTipNum();
-							// thread = new MyThread();
-							// thread.start();
-							// Message m = new Message();
-							// m.what = 4;
-							// mHandler.sendMessage(m);
 						}
 					});
 		}
@@ -257,7 +213,7 @@ public class GameFragment extends Fragment implements Music {
 		}
 	}
 
-	private void stopTimer() {
+	public void stopTimer() {
 		if (timer != null) {
 			timer.cancel();
 			timer = null;
@@ -270,18 +226,11 @@ public class GameFragment extends Fragment implements Music {
 
 			@Override
 			public void run() {
-				switch (GameState) {
-				case Contants.game_isPlaying:
-					progress.setProgress(leftTime--);
-					RefreshGameView refreshGameView = new RefreshGameView();
-					refreshGameView.execute(fragment, myview, GameState,
-							leftTime);
-					break;
-				case Contants.game_win:
-					stopTimer();
-					break;
-				}
-
+				progress.setProgress(leftTime);
+				RefreshGameState refreshGameView = new RefreshGameState();
+				refreshGameView.execute(fragment, myview, GameState, leftTime);
+				Log.i("timerTask", "" + leftTime);
+				leftTime--;
 			}
 		};
 		return task;

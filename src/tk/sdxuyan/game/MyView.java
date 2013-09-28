@@ -9,7 +9,7 @@ public class MyView extends BoardView {
 	/**
 	 * 第一关游戏时间为100秒
 	 * */
-	private int total_time = 100;
+	private int total_time = 10;
 
 	/**
 	 * 定义重置和帮助的次数

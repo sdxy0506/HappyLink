@@ -73,4 +73,16 @@ public class WelcomeFragment extends Fragment implements Music {
 		play_welcome.start();
 	}
 
+	@Override
+	public void onPause() {
+		play_welcome.pause();
+		super.onPause();
+	}
+
+	@Override
+	public void onResume() {
+		play_welcome.start();
+		super.onResume();
+	}
+
 }
