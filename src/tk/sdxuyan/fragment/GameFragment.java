@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.xuyan.happylink.R;
 
@@ -38,23 +39,28 @@ public class GameFragment extends Fragment implements Music {
 	private MediaPlayer player_play;
 
 	private boolean isStop = false;
-	private boolean isPause = false;
-	private boolean isPlay = false;
 
 	private int leftTime;
 	private int RefreshNum;
 	private int TipNum;
+	private int GameState = Contants.game_isPlaying;// 游戏状态为正在进行游戏
 
 	private Timer timer;
 	private TimerTask task;
+
+	private GameFragment fragment;
+
+	public GameFragment() {
+		super();
+		fragment = this;
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		gameView = inflater.inflate(R.layout.play_game, container, false);
-		timer = new Timer();
-		timer.schedule(getTask(), 0, 1000);
 		init();
+		// startTimer();
 		return gameView;
 	}
 
@@ -93,16 +99,14 @@ public class GameFragment extends Fragment implements Music {
 		start();
 	}
 
-	private void start() {
-		progress.setProgress(myview.getTotalTime());
-
-		isPlay = true;
-
+	public void start() {
 		setMusic();
-		myview.play();
 		leftTime = myview.getTotalTime();
 		RefreshNum = myview.getRefreshNum();
-		TipNum = myview.getTipNum();
+		TipNum = 1000;
+		progress.setProgress(leftTime);
+		startTimer();
+		myview.play();
 	}
 
 	// private MyThread thread;
@@ -136,7 +140,7 @@ public class GameFragment extends Fragment implements Music {
 
 	private class MyThread extends Thread {
 		public void run() {
-			while (leftTime >= 0 && !isStop && !isPause) {
+			while (leftTime >= 0 && !isStop) {
 
 				if (myview.win())
 					isStop = true;
@@ -157,15 +161,15 @@ public class GameFragment extends Fragment implements Music {
 					leftTime--;
 				}
 			}
-			if (!isPause) {
-				Message m = new Message();
-				if (isStop && !isPause)
-					m.what = 0;
-				else {
-					m.what = 2;
-				}
-				mHandler.sendMessage(m);
-			}
+			// if (!isPause) {
+			// Message m = new Message();
+			// if (isStop && !isPause)
+			// m.what = 0;
+			// else {
+			// m.what = 2;
+			// }
+			// mHandler.sendMessage(m);
+			// }
 		}
 	}
 
@@ -228,49 +232,54 @@ public class GameFragment extends Fragment implements Music {
 	public void onDestroyView() {
 		super.onDestroyView();
 		player_play.stop();
+		stopTimer();
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		player_play.pause();
-		isPause = true;
 		stopTimer();
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (timer == null) {
-			startTimer();
-		}
-		isPause = false;
-		if (isPlay) {
-			player_play.start();
-		}
+		startTimer();
+		player_play.start();
 	}
 
 	// 启动定时器
 	private void startTimer() {
-		timer = new Timer();
-		timer.schedule(getTask(), 0, 1000);
+		if (timer == null) {
+			timer = new Timer();
+			timer.schedule(getTask(), 0, 1000);
+		}
 	}
 
 	private void stopTimer() {
-		timer.cancel();
-		timer = null;
+		if (timer != null) {
+			timer.cancel();
+			timer = null;
+		}
 	}
 
+	// 设置定时器的任务
 	public TimerTask getTask() {
 		task = new TimerTask() {
 
 			@Override
 			public void run() {
-				if (leftTime > 0) {
+				switch (GameState) {
+				case Contants.game_isPlaying:
+					progress.setProgress(leftTime--);
 					RefreshGameView refreshGameView = new RefreshGameView();
-					refreshGameView.execute(myview, Contants.game_refresh,
-							leftTime--);
-					progress.setProgress(leftTime);
+					refreshGameView.execute(fragment, myview, GameState,
+							leftTime);
+					break;
+				case Contants.game_win:
+					stopTimer();
+					break;
 				}
 
 			}
@@ -284,6 +293,10 @@ public class GameFragment extends Fragment implements Music {
 		player_play.setLooping(true);
 		player_play.start();
 
+	}
+
+	public void setGameState(int state) {
+		GameState = state;
 	}
 
 }

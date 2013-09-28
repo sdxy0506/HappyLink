@@ -8,4 +8,5 @@ public class Contants {
 	public static final int game_over = 1001;// 游戏失败
 	public static final int game_next = 1002;// 进行下一局游戏
 	public static final int game_refresh = 1003;// 游戏刷新
+	public static final int game_isPlaying = 1004;// 游戏进行中
 }

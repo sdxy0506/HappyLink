@@ -22,7 +22,7 @@ public class MyView extends BoardView {
 	}
 
 	public void play() {
-		TipNum = 3;
+		TipNum = 1000;
 		RefreshNum = 3;
 		setMap();
 		MyView.this.invalidate();
