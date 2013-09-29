@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import tk.sdxuyan.tool.Contants;
+
 import com.xuyan.happylink.R;
 
 import android.annotation.SuppressLint;
@@ -19,6 +21,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
+import android.text.StaticLayout;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
@@ -69,14 +72,6 @@ public class BoardView extends View {
 
 	public static SoundPlay soundPlay;
 
-	public static final int ID_SOUND_CHOOSE = 0;
-	public static final int ID_SOUND_DISAPEAR = 1;
-	public static final int ID_SOUND_WIN = 2;
-	public static final int ID_SOUND_LOSE = 3;
-	public static final int ID_SOUND_REFRESH = 4;
-	public static final int ID_SOUND_TIP = 5;
-	public static final int ID_SOUND_ERROR = 6;
-
 	/**
 	 * 设置各类paint的参数
 	 */
@@ -121,13 +116,13 @@ public class BoardView extends View {
 	public static void initSound(Context context) {
 		soundPlay = new SoundPlay();
 		soundPlay.initSounds(context);
-		soundPlay.loadSfx(context, R.raw.choose, ID_SOUND_CHOOSE);
-		soundPlay.loadSfx(context, R.raw.disappear, ID_SOUND_DISAPEAR);
-		soundPlay.loadSfx(context, R.raw.win, ID_SOUND_WIN);
-		soundPlay.loadSfx(context, R.raw.lose, ID_SOUND_LOSE);
-		soundPlay.loadSfx(context, R.raw.item1, ID_SOUND_REFRESH);
-		soundPlay.loadSfx(context, R.raw.item2, ID_SOUND_TIP);
-		soundPlay.loadSfx(context, R.raw.alarm, ID_SOUND_ERROR);
+		soundPlay.loadSfx(context, R.raw.choose, Contants.ID_SOUND_CHOOSE);
+		soundPlay.loadSfx(context, R.raw.disappear, Contants.ID_SOUND_DISAPEAR);
+		soundPlay.loadSfx(context, R.raw.win, Contants.ID_SOUND_WIN);
+		soundPlay.loadSfx(context, R.raw.lose, Contants.ID_SOUND_LOSE);
+		soundPlay.loadSfx(context, R.raw.item1, Contants.ID_SOUND_REFRESH);
+		soundPlay.loadSfx(context, R.raw.item2, Contants.ID_SOUND_TIP);
+		soundPlay.loadSfx(context, R.raw.alarm, Contants.ID_SOUND_ERROR);
 	}
 
 	/**
@@ -190,7 +185,7 @@ public class BoardView extends View {
 				map[xc][yc] = tc;
 			}
 		}
-		soundPlay.play(ID_SOUND_REFRESH, 0);
+		soundPlay.play(Contants.ID_SOUND_REFRESH, 0);
 		BoardView.this.invalidate();
 	}
 
@@ -262,12 +257,12 @@ public class BoardView extends View {
 					} else {
 						selected.clear();
 						selected.add(p);
-						soundPlay.play(ID_SOUND_CHOOSE, 0);
+						soundPlay.play(Contants.ID_SOUND_CHOOSE, 0);
 						invalidate();
 					}
 				} else {
 					selected.add(p);
-					soundPlay.play(ID_SOUND_CHOOSE, 0);
+					soundPlay.play(Contants.ID_SOUND_CHOOSE, 0);
 					invalidate();
 				}
 			}
@@ -275,11 +270,10 @@ public class BoardView extends View {
 		return super.onTouchEvent(event);
 	}
 
-	@SuppressLint("HandlerLeak")
 	public void removeMap(Point a, Point b) {
 		map[a.x][a.y] = 0;
 		map[b.x][b.y] = 0;
-		soundPlay.play(ID_SOUND_DISAPEAR, 0);
+		soundPlay.play(Contants.ID_SOUND_DISAPEAR, 0);
 		BoardView.this.invalidate();
 		final Handler mHandler = new Handler() {
 			@Override

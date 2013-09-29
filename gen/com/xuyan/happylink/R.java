@@ -1214,12 +1214,12 @@ containing a value of this type.
     public static final class raw {
         public static final int alarm=0x7f040000;
         public static final int back2new=0x7f040001;
-        public static final int bg=0x7f040002;
-        public static final int choose=0x7f040003;
-        public static final int disappear1=0x7f040004;
-        public static final int item1=0x7f040005;
-        public static final int item2=0x7f040006;
-        public static final int lose=0x7f040007;
+        public static final int choose=0x7f040002;
+        public static final int disappear=0x7f040003;
+        public static final int item1=0x7f040004;
+        public static final int item2=0x7f040005;
+        public static final int lose=0x7f040006;
+        public static final int welcome_bg=0x7f040007;
         public static final int win=0x7f040008;
     }
     public static final class string {

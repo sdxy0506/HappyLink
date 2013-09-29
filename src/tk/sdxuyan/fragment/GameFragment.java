@@ -2,18 +2,14 @@ package tk.sdxuyan.fragment;
 
 import java.util.Timer;
 import java.util.TimerTask;
-
 import tk.sdxuyan.game.BoardView;
 import tk.sdxuyan.game.GameView;
-import tk.sdxuyan.game.RefreshGameState;
+import tk.sdxuyan.game.onGameStateListener;
+import tk.sdxuyan.game.onHelpNumChange;
 import tk.sdxuyan.tool.Contants;
 import tk.sdxuyan.tool.Music;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -58,7 +54,6 @@ public class GameFragment extends Fragment implements Music {
 			Bundle savedInstanceState) {
 		playView = inflater.inflate(R.layout.play_game, container, false);
 		init();
-		// startTimer();
 		return playView;
 	}
 
@@ -81,6 +76,7 @@ public class GameFragment extends Fragment implements Music {
 				if (RefreshNum > 0) {
 					gameView.change();
 					RefreshNum--;
+					new onHelpNumChange().execute(textRefreshNum, RefreshNum);
 				}
 			}
 		});
@@ -91,6 +87,7 @@ public class GameFragment extends Fragment implements Music {
 				if (TipNum > 0) {
 					gameView.auto_clear();
 					TipNum--;
+					new onHelpNumChange().execute(textTipNum, TipNum);
 				}
 			}
 		});
@@ -100,8 +97,10 @@ public class GameFragment extends Fragment implements Music {
 	public void start() {
 		setMusic();
 		leftTime = gameView.getTotalTime();
-		RefreshNum = gameView.getRefreshNum();
-		TipNum = 1000;
+		RefreshNum = Contants.game_refresh_number;
+		TipNum = Contants.game_tip_number;
+		new onHelpNumChange().execute(textRefreshNum, RefreshNum);
+		new onHelpNumChange().execute(textTipNum, TipNum);
 		progress.setMax(leftTime);
 		progress.setProgress(leftTime);
 		startTimer();
@@ -151,7 +150,7 @@ public class GameFragment extends Fragment implements Music {
 			@Override
 			public void run() {
 				progress.setProgress(leftTime);
-				RefreshGameState refreshGameView = new RefreshGameState();
+				onGameStateListener refreshGameView = new onGameStateListener();
 				refreshGameView
 						.execute(fragment, gameView, GameState, leftTime);
 				Log.i("timerTask", "" + leftTime);

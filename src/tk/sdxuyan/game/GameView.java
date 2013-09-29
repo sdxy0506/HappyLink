@@ -1,5 +1,6 @@
 package tk.sdxuyan.game;
 
+import tk.sdxuyan.tool.Contants;
 import android.content.Context;
 import android.graphics.Point;
 import android.util.AttributeSet;
@@ -11,19 +12,11 @@ public class GameView extends BoardView {
 	 * */
 	private int total_time = 10;
 
-	/**
-	 * 定义重置和帮助的次数
-	 * */
-	private int RefreshNum = 3;
-	private int TipNum = 3;
-
 	public GameView(Context context, AttributeSet set) {
 		super(context, set);
 	}
 
 	public void play() {
-		TipNum = 1000;
-		RefreshNum = 3;
 		setMap();
 		GameView.this.invalidate();
 	}
@@ -49,7 +42,7 @@ public class GameView extends BoardView {
 			}
 		}
 		if (flag) {
-			soundPlay.play(ID_SOUND_WIN, 0);
+			soundPlay.play(Contants.ID_SOUND_WIN, 0);
 		}
 		return flag;
 	}
@@ -58,19 +51,11 @@ public class GameView extends BoardView {
 		return total_time;
 	}
 
-	public int getTipNum() {
-		return TipNum;
-	}
-
-	public int getRefreshNum() {
-		return RefreshNum;
-	}
-
 	/**
 	 * 检测当前是否有能连接的图块
 	 * */
 	public boolean die() {
-		soundPlay.play(ID_SOUND_LOSE, 0);
+		soundPlay.play(Contants.ID_SOUND_ERROR, 0);
 		return check.die(map);
 	}
 

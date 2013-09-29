@@ -8,7 +8,7 @@ import android.R.integer;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
-public class RefreshGameState extends AsyncTask<Object, Object, integer>
+public class onGameStateListener extends AsyncTask<Object, Object, integer>
 		implements GameDone {
 
 	private GameView myView;
@@ -46,9 +46,6 @@ public class RefreshGameState extends AsyncTask<Object, Object, integer>
 
 	@Override
 	public void GameWin() {
-		// Toast.makeText(fragment.getActivity(),
-		// "胜利了！！！" + (myView.getTotalTime() - leftTime),
-		// Toast.LENGTH_SHORT).show();
 		new MyDialog(fragment.getActivity(), fragment, "胜利了！",
 				myView.getTotalTime() - leftTime).show();
 		fragment.stopMusic();
@@ -57,11 +54,9 @@ public class RefreshGameState extends AsyncTask<Object, Object, integer>
 
 	@Override
 	public void GameOver() {
-		// Toast.makeText(fragment.getActivity(),
-		// "失败了！！！" + (myView.getTotalTime() - leftTime),
-		// Toast.LENGTH_SHORT).show();
 		new MyDialog(fragment.getActivity(), fragment, "失败！",
 				myView.getTotalTime() - leftTime).show();
+		BoardView.soundPlay.play(Contants.ID_SOUND_LOSE, 0);
 		fragment.stopMusic();
 		fragment.stopTimer();
 	}
