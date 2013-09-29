@@ -47,7 +47,7 @@ public class onGameStateListener extends AsyncTask<Object, Object, integer>
 	@Override
 	public void GameWin() {
 		new MyDialog(fragment.getActivity(), fragment, "胜利了！",
-				myView.getTotalTime() - leftTime).show();
+				fragment.getTotalTime() - leftTime).show();
 		fragment.stopMusic();
 		fragment.stopTimer();
 	}
@@ -55,7 +55,7 @@ public class onGameStateListener extends AsyncTask<Object, Object, integer>
 	@Override
 	public void GameOver() {
 		new MyDialog(fragment.getActivity(), fragment, "失败！",
-				myView.getTotalTime() - leftTime).show();
+				fragment.getTotalTime() - leftTime).show();
 		BoardView.soundPlay.play(Contants.ID_SOUND_LOSE, 0);
 		fragment.stopMusic();
 		fragment.stopTimer();

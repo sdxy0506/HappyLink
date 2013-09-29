@@ -7,11 +7,6 @@ import android.util.AttributeSet;
 
 public class GameView extends BoardView {
 
-	/**
-	 * 第一关游戏时间为100秒
-	 * */
-	private int total_time = 10;
-
 	public GameView(Context context, AttributeSet set) {
 		super(context, set);
 	}
@@ -19,15 +14,6 @@ public class GameView extends BoardView {
 	public void play() {
 		setMap();
 		GameView.this.invalidate();
-	}
-
-	public void next() {
-		total_time = total_time - 10;
-		play();
-	}
-
-	public void setTotal_time(int total_time) {
-		this.total_time = total_time;
 	}
 
 	/**
@@ -45,10 +31,6 @@ public class GameView extends BoardView {
 			soundPlay.play(Contants.ID_SOUND_WIN, 0);
 		}
 		return flag;
-	}
-
-	public int getTotalTime() {
-		return total_time;
 	}
 
 	/**

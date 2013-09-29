@@ -35,6 +35,7 @@ public class GameFragment extends Fragment implements Music {
 	private MediaPlayer player_play;
 
 	private int leftTime;
+	private int totalTime = Contants.game_time_initial;
 	private int RefreshNum;
 	private int TipNum;
 	private int GameState = Contants.game_isPlaying;// 游戏状态为正在进行游戏
@@ -96,7 +97,7 @@ public class GameFragment extends Fragment implements Music {
 
 	public void start() {
 		setMusic();
-		leftTime = gameView.getTotalTime();
+		leftTime = getTotalTime();
 		RefreshNum = Contants.game_refresh_number;
 		TipNum = Contants.game_tip_number;
 		new onHelpNumChange().execute(textRefreshNum, RefreshNum);
@@ -198,4 +199,17 @@ public class GameFragment extends Fragment implements Music {
 		}
 
 	}
+
+	public int getTotalTime() {
+		return totalTime;
+	}
+
+	public void setTotalTime(int totalTime) {
+		this.totalTime = totalTime;
+	}
+
+	public int getLeftTime() {
+		return leftTime;
+	}
+
 }

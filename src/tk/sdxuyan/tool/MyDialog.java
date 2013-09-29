@@ -79,6 +79,12 @@ public class MyDialog extends Dialog implements OnClickListener {
 			fragment.start();
 			break;
 		case R.id.next_imgbtn:
+			if (fragment.getTotalTime() > 10) {
+				fragment.setTotalTime(fragment.getTotalTime() - 10);
+				fragment.start();
+				return;
+			}
+			fragment.start();
 			break;
 		}
 	}
