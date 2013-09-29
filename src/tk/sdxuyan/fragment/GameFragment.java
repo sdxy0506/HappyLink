@@ -4,11 +4,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import tk.sdxuyan.game.BoardView;
-import tk.sdxuyan.game.MyView;
+import tk.sdxuyan.game.GameView;
 import tk.sdxuyan.game.RefreshGameState;
 import tk.sdxuyan.tool.Contants;
 import tk.sdxuyan.tool.Music;
-import tk.sdxuyan.tool.showDialog;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.media.MediaPlayer;
@@ -27,16 +26,15 @@ import android.widget.TextView;
 
 import com.xuyan.happylink.R;
 
-public class GameFragment extends Fragment implements Music, showDialog {
+public class GameFragment extends Fragment implements Music {
 
-	private View gameView;
+	private View playView;
 	private ImageButton btnRefresh;
 	private ImageButton btnTip;
-	private MyView myview;
+	private GameView gameView;
 	private ProgressBar progress;
 	private TextView textRefreshNum;
 	private TextView textTipNum;
-	private AlertDialog.Builder dialog;
 
 	private MediaPlayer player_play;
 
@@ -58,30 +56,30 @@ public class GameFragment extends Fragment implements Music, showDialog {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		gameView = inflater.inflate(R.layout.play_game, container, false);
+		playView = inflater.inflate(R.layout.play_game, container, false);
 		init();
 		// startTimer();
-		return gameView;
+		return playView;
 	}
 
 	private void init() {
 		/**
 		 * 绑定各类控件
 		 * */
-		myview = (MyView) gameView.findViewById(R.id.amyview);
-		btnRefresh = (ImageButton) gameView.findViewById(R.id.arefresh_btn);
-		btnTip = (ImageButton) gameView.findViewById(R.id.atip_btn);
-		textRefreshNum = (TextView) gameView
+		gameView = (GameView) playView.findViewById(R.id.amyview);
+		btnRefresh = (ImageButton) playView.findViewById(R.id.arefresh_btn);
+		btnTip = (ImageButton) playView.findViewById(R.id.atip_btn);
+		textRefreshNum = (TextView) playView
 				.findViewById(R.id.atext_refresh_num);
-		textTipNum = (TextView) gameView.findViewById(R.id.atext_tip_num);
-		progress = (ProgressBar) gameView.findViewById(R.id.atimer);
+		textTipNum = (TextView) playView.findViewById(R.id.atext_tip_num);
+		progress = (ProgressBar) playView.findViewById(R.id.atimer);
 		BoardView.initSound(getActivity());
 		btnRefresh.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				if (RefreshNum > 0) {
-					myview.change();
+					gameView.change();
 					RefreshNum--;
 				}
 			}
@@ -91,7 +89,7 @@ public class GameFragment extends Fragment implements Music, showDialog {
 			@Override
 			public void onClick(View v) {
 				if (TipNum > 0) {
-					myview.auto_clear();
+					gameView.auto_clear();
 					TipNum--;
 				}
 			}
@@ -101,98 +99,26 @@ public class GameFragment extends Fragment implements Music, showDialog {
 
 	public void start() {
 		setMusic();
-		leftTime = myview.getTotalTime();
-		RefreshNum = myview.getRefreshNum();
+		leftTime = gameView.getTotalTime();
+		RefreshNum = gameView.getRefreshNum();
 		TipNum = 1000;
 		progress.setMax(leftTime);
 		progress.setProgress(leftTime);
 		startTimer();
-		myview.play();
-	}
-
-	// private MyThread thread;
-	private Handler mHandler = new Handler() {
-
-		@Override
-		public void handleMessage(Message msg) {
-
-			super.handleMessage(msg);
-			switch (msg.what) {
-			case 0:
-				myDialog(myview, "胜利！", myview.getTotalTime() - leftTime, 0);
-				break;
-			case 1:
-				progress.setProgress(leftTime);
-				break;
-			case 2:
-				myDialog(myview, "失败！", myview.getTotalTime() - leftTime, 2);
-				break;
-			case 3:
-				myview.change();
-				break;
-			case 4:
-				textRefreshNum.setText(" " + RefreshNum);
-				textTipNum.setText(" " + TipNum);
-				break;
-			}
-		}
-
-	};
-
-	private void myDialog(View v, String state, int time, int msg) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		builder.setCancelable(false);
-		builder.setTitle(state).setMessage("所用时间为：" + time + "秒！");
-
-		if (msg == 0) {
-			builder.setPositiveButton("下一关",
-					new DialogInterface.OnClickListener() {
-
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							myview.next();
-							leftTime = myview.getTotalTime();
-							RefreshNum = myview.getRefreshNum();
-							TipNum = myview.getTipNum();
-						}
-					});
-		} else {
-			builder.setPositiveButton("重新开始",
-					new DialogInterface.OnClickListener() {
-
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							myview.play();
-							myview.setTotal_time(100);
-							leftTime = myview.getTotalTime();
-							RefreshNum = myview.getRefreshNum();
-							TipNum = myview.getTipNum();
-						}
-					});
-		}
-
-		builder.setNegativeButton("退出！", new DialogInterface.OnClickListener() {
-
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				getActivity().finish();
-				player_play.stop();
-			}
-		}).create();
-		builder.show();
+		gameView.play();
 	}
 
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
-		player_play.stop();
+		stopMusic();
 		stopTimer();
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		player_play.pause();
+		pauseMusic();
 		stopTimer();
 	}
 
@@ -200,7 +126,7 @@ public class GameFragment extends Fragment implements Music, showDialog {
 	public void onResume() {
 		super.onResume();
 		startTimer();
-		player_play.start();
+		startMusic();
 	}
 
 	// 启动定时器
@@ -226,7 +152,8 @@ public class GameFragment extends Fragment implements Music, showDialog {
 			public void run() {
 				progress.setProgress(leftTime);
 				RefreshGameState refreshGameView = new RefreshGameState();
-				refreshGameView.execute(fragment, myview, GameState, leftTime);
+				refreshGameView
+						.execute(fragment, gameView, GameState, leftTime);
 				Log.i("timerTask", "" + leftTime);
 				leftTime--;
 			}
@@ -234,20 +161,42 @@ public class GameFragment extends Fragment implements Music, showDialog {
 		return task;
 	}
 
-	@Override
-	public void setMusic() {
-		player_play = MediaPlayer.create(getActivity(), R.raw.back2new);
-		player_play.setLooping(true);
-		player_play.start();
-
-	}
-
 	public void setGameState(int state) {
 		GameState = state;
 	}
 
 	@Override
-	public void show_dialog() {
-		dialog = new AlertDialog.Builder(getActivity());
+	public void setMusic() {
+		if (player_play == null) {
+			player_play = MediaPlayer.create(getActivity(), R.raw.back2new);
+			player_play.setLooping(true);
+			startMusic();
+		}
+
+	}
+
+	@Override
+	public void startMusic() {
+		if (player_play != null) {
+			player_play.start();
+		}
+
+	}
+
+	@Override
+	public void stopMusic() {
+		if (player_play != null) {
+			player_play.stop();
+			player_play = null;
+		}
+
+	}
+
+	@Override
+	public void pauseMusic() {
+		if (player_play != null) {
+			player_play.pause();
+		}
+
 	}
 }

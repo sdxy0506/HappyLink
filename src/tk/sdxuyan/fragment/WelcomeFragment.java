@@ -62,27 +62,52 @@ public class WelcomeFragment extends Fragment implements Music {
 
 	@Override
 	public void onDestroyView() {
-		play_welcome.stop();
+		stopMusic();
 		super.onDestroyView();
 	}
 
 	@Override
-	public void setMusic() {
-		play_welcome = MediaPlayer.create(getActivity(), R.raw.bg);
-		play_welcome.setLooping(true);// 设置循环播放
-		play_welcome.start();
-	}
-
-	@Override
 	public void onPause() {
-		play_welcome.pause();
+		pauseMusic();
 		super.onPause();
 	}
 
 	@Override
 	public void onResume() {
-		play_welcome.start();
+		startMusic();
 		super.onResume();
+	}
+
+	@Override
+	public void setMusic() {
+		if (play_welcome == null) {
+			play_welcome = MediaPlayer.create(getActivity(), R.raw.welcome_bg);
+			play_welcome.setLooping(true);// 设置循环播放
+		}
+	}
+
+	@Override
+	public void startMusic() {
+		if (play_welcome != null) {
+			play_welcome.start();
+		}
+
+	}
+
+	@Override
+	public void stopMusic() {
+		if (play_welcome != null) {
+			play_welcome.stop();
+		}
+
+	}
+
+	@Override
+	public void pauseMusic() {
+		if (play_welcome != null) {
+			play_welcome.pause();
+		}
+
 	}
 
 }

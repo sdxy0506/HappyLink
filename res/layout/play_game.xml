@@ -46,7 +46,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall" />
     </LinearLayout>
 
-    <tk.sdxuyan.game.MyView
+    <tk.sdxuyan.game.GameView
         android:id="@+id/amyview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

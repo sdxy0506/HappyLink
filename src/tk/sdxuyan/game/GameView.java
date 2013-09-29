@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.Point;
 import android.util.AttributeSet;
 
-public class MyView extends BoardView {
+public class GameView extends BoardView {
 
 	/**
 	 * 第一关游戏时间为100秒
@@ -17,7 +17,7 @@ public class MyView extends BoardView {
 	private int RefreshNum = 3;
 	private int TipNum = 3;
 
-	public MyView(Context context, AttributeSet set) {
+	public GameView(Context context, AttributeSet set) {
 		super(context, set);
 	}
 
@@ -25,7 +25,7 @@ public class MyView extends BoardView {
 		TipNum = 1000;
 		RefreshNum = 3;
 		setMap();
-		MyView.this.invalidate();
+		GameView.this.invalidate();
 	}
 
 	public void next() {
@@ -48,6 +48,9 @@ public class MyView extends BoardView {
 					flag = false;
 			}
 		}
+		if (flag) {
+			soundPlay.play(ID_SOUND_WIN, 0);
+		}
 		return flag;
 	}
 
@@ -67,6 +70,7 @@ public class MyView extends BoardView {
 	 * 检测当前是否有能连接的图块
 	 * */
 	public boolean die() {
+		soundPlay.play(ID_SOUND_LOSE, 0);
 		return check.die(map);
 	}
 
@@ -84,7 +88,7 @@ public class MyView extends BoardView {
 									&& check.checklink(a, new Point(x, y))) {
 								b = new Point(x, y);
 								removeMap(a, b);
-								MyView.this.invalidate();
+								GameView.this.invalidate();
 								return true;
 							}
 						}
@@ -93,7 +97,7 @@ public class MyView extends BoardView {
 				}
 			}
 		}
-		MyView.this.invalidate();
+		GameView.this.invalidate();
 		return false;
 	}
 }

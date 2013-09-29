@@ -71,11 +71,11 @@ public class BoardView extends View {
 
 	public static final int ID_SOUND_CHOOSE = 0;
 	public static final int ID_SOUND_DISAPEAR = 1;
-	public static final int ID_SOUND_WIN = 4;
-	public static final int ID_SOUND_LOSE = 5;
-	public static final int ID_SOUND_REFRESH = 6;
-	public static final int ID_SOUND_TIP = 7;
-	public static final int ID_SOUND_ERROR = 8;
+	public static final int ID_SOUND_WIN = 2;
+	public static final int ID_SOUND_LOSE = 3;
+	public static final int ID_SOUND_REFRESH = 4;
+	public static final int ID_SOUND_TIP = 5;
+	public static final int ID_SOUND_ERROR = 6;
 
 	/**
 	 * 设置各类paint的参数
@@ -122,7 +122,7 @@ public class BoardView extends View {
 		soundPlay = new SoundPlay();
 		soundPlay.initSounds(context);
 		soundPlay.loadSfx(context, R.raw.choose, ID_SOUND_CHOOSE);
-		soundPlay.loadSfx(context, R.raw.disappear1, ID_SOUND_DISAPEAR);
+		soundPlay.loadSfx(context, R.raw.disappear, ID_SOUND_DISAPEAR);
 		soundPlay.loadSfx(context, R.raw.win, ID_SOUND_WIN);
 		soundPlay.loadSfx(context, R.raw.lose, ID_SOUND_LOSE);
 		soundPlay.loadSfx(context, R.raw.item1, ID_SOUND_REFRESH);
