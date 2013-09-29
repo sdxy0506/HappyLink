@@ -8,6 +8,7 @@ import tk.sdxuyan.game.MyView;
 import tk.sdxuyan.game.RefreshGameState;
 import tk.sdxuyan.tool.Contants;
 import tk.sdxuyan.tool.Music;
+import tk.sdxuyan.tool.showDialog;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.media.MediaPlayer;
@@ -26,7 +27,7 @@ import android.widget.TextView;
 
 import com.xuyan.happylink.R;
 
-public class GameFragment extends Fragment implements Music {
+public class GameFragment extends Fragment implements Music, showDialog {
 
 	private View gameView;
 	private ImageButton btnRefresh;
@@ -35,10 +36,9 @@ public class GameFragment extends Fragment implements Music {
 	private ProgressBar progress;
 	private TextView textRefreshNum;
 	private TextView textTipNum;
+	private AlertDialog.Builder dialog;
 
 	private MediaPlayer player_play;
-
-	private boolean isStop = false;
 
 	private int leftTime;
 	private int RefreshNum;
@@ -151,7 +151,6 @@ public class GameFragment extends Fragment implements Music {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							myview.next();
-							isStop = false;
 							leftTime = myview.getTotalTime();
 							RefreshNum = myview.getRefreshNum();
 							TipNum = myview.getTipNum();
@@ -164,7 +163,6 @@ public class GameFragment extends Fragment implements Music {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							myview.play();
-							isStop = false;
 							myview.setTotal_time(100);
 							leftTime = myview.getTotalTime();
 							RefreshNum = myview.getRefreshNum();
@@ -248,4 +246,8 @@ public class GameFragment extends Fragment implements Music {
 		GameState = state;
 	}
 
+	@Override
+	public void show_dialog() {
+		dialog = new AlertDialog.Builder(getActivity());
+	}
 }
