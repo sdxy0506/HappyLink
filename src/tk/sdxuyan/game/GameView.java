@@ -67,8 +67,5 @@ public class GameView extends BoardView implements onScoreListener {
 		GameView.this.invalidate();
 		return false;
 	}
-	
-	
-	
 
 }

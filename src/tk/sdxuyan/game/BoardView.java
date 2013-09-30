@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import tk.sdxuyan.fragment.GameFragment;
 import tk.sdxuyan.tool.Contants;
 import tk.sdxuyan.tool.onScoreListener;
 import android.app.Activity;
@@ -23,7 +22,6 @@ import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.TextView;
 
 import com.xuyan.happylink.R;
 
@@ -338,7 +336,5 @@ public class BoardView extends View implements onScoreListener {
 	public void setScore(int score) {
 		Score = score;
 	}
-	
-	
 
 }

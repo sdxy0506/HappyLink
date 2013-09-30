@@ -257,5 +257,5 @@ public class GameFragment extends Fragment implements Music, setTimer {
 			timerScore = null;
 		}
 	}
-	
+
 }
