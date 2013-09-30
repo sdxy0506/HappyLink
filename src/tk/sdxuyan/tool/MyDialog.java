@@ -2,7 +2,6 @@ package tk.sdxuyan.tool;
 
 import tk.sdxuyan.fragment.GameFragment;
 import tk.sdxuyan.fragment.WelcomeFragment;
-import tk.sdxuyan.game.GameView;
 import tk.sdxuyan.slidemenudemo.FragmentChangeActivity;
 import android.app.AlertDialog;
 import android.app.Dialog;

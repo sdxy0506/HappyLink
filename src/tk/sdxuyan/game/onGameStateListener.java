@@ -6,7 +6,6 @@ import tk.sdxuyan.tool.GameDone;
 import tk.sdxuyan.tool.MyDialog;
 import android.R.integer;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 public class onGameStateListener extends AsyncTask<Object, Object, integer>
 		implements GameDone {
@@ -28,6 +27,9 @@ public class onGameStateListener extends AsyncTask<Object, Object, integer>
 	@Override
 	protected void onPostExecute(integer result) {
 		super.onPostExecute(result);
+		if (myView.die()) {
+			myView.change();
+		}
 		switchState();
 	}
 

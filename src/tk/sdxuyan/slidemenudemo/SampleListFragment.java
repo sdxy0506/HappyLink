@@ -1,8 +1,6 @@
 package tk.sdxuyan.slidemenudemo;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
@@ -26,7 +24,7 @@ public class SampleListFragment extends ListFragment {
 		SampleAdapter adapter = new SampleAdapter(getActivity());
 		for (int i = 0; i < 20; i++) {
 			adapter.add(new SampleItem("Sample List",
-					android.R.drawable.ic_menu_search));
+					R.drawable.ic_launcher));
 		}
 		setListAdapter(adapter);
 	}

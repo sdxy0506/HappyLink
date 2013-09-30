@@ -1159,8 +1159,8 @@ containing a value of this type.
         public static final int timer=0x7f050039;
         public static final int tip_btn=0x7f05003d;
         public static final int title_img=0x7f050038;
-        public static final int tv_goal=0x7f05004b;
         public static final int tv_level=0x7f05004a;
+        public static final int tv_score=0x7f05004b;
         public static final int useLogo=0x7f050004;
         public static final int version=0x7f050056;
         public static final int view_dialog=0x7f050040;

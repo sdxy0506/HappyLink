@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import tk.sdxuyan.fragment.GameFragment;
 import tk.sdxuyan.tool.Contants;
-
-import com.xuyan.happylink.R;
-
-import android.annotation.SuppressLint;
+import tk.sdxuyan.tool.onScoreListener;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
@@ -21,13 +19,18 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
-import android.text.StaticLayout;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
 
-public class BoardView extends View {
+import com.xuyan.happylink.R;
+
+public class BoardView extends View implements onScoreListener {
+
+	private int Score = 0;
+	private int singleScore = 10;
 
 	/**
 	 * 定义数组的行数和列数
@@ -87,7 +90,6 @@ public class BoardView extends View {
 		super(context, set);
 		calIconSize();
 		setPaint();
-
 		icons[0] = null;
 		Resources r = getResources();
 		loadBitmaps(1, r.getDrawable(R.drawable.fish_01));
@@ -273,6 +275,7 @@ public class BoardView extends View {
 	public void removeMap(Point a, Point b) {
 		map[a.x][a.y] = 0;
 		map[b.x][b.y] = 0;
+		addScore();
 		soundPlay.play(Contants.ID_SOUND_DISAPEAR, 0);
 		BoardView.this.invalidate();
 		final Handler mHandler = new Handler() {
@@ -301,6 +304,27 @@ public class BoardView extends View {
 		}
 		Thread my = new MyThread();
 		my.start();
+	}
+
+	@Override
+	public int initScore() {
+		Score = 0;
+		return Score;
+	}
+
+	@Override
+	public int addScore() {
+		Score += singleScore;
+		return Score;
+	}
+
+	@Override
+	public int singleScore() {
+		return singleScore = 10;
+	}
+
+	public int getScore() {
+		return Score;
 	}
 
 }

@@ -2,12 +2,14 @@ package tk.sdxuyan.fragment;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
 import tk.sdxuyan.game.BoardView;
 import tk.sdxuyan.game.GameView;
 import tk.sdxuyan.game.onGameStateListener;
 import tk.sdxuyan.game.onHelpNumChange;
 import tk.sdxuyan.tool.Contants;
 import tk.sdxuyan.tool.Music;
+import tk.sdxuyan.tool.setTimer;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -22,7 +24,7 @@ import android.widget.TextView;
 
 import com.xuyan.happylink.R;
 
-public class GameFragment extends Fragment implements Music {
+public class GameFragment extends Fragment implements Music, setTimer {
 
 	private View playView;
 	private ImageButton btnRefresh;
@@ -31,6 +33,7 @@ public class GameFragment extends Fragment implements Music {
 	private ProgressBar progress;
 	private TextView textRefreshNum;
 	private TextView textTipNum;
+	private TextView textScore;
 
 	private MediaPlayer player_play;
 
@@ -41,7 +44,9 @@ public class GameFragment extends Fragment implements Music {
 	private int GameState = Contants.game_isPlaying;// 游戏状态为正在进行游戏
 
 	private Timer timer;
+	private Timer timerScore;
 	private TimerTask task;
+	private TimerTask taskScore;
 
 	private GameFragment fragment;
 
@@ -58,6 +63,10 @@ public class GameFragment extends Fragment implements Music {
 		return playView;
 	}
 
+	public TextView getTextScore() {
+		return textScore;
+	}
+
 	private void init() {
 		/**
 		 * 绑定各类控件
@@ -68,6 +77,7 @@ public class GameFragment extends Fragment implements Music {
 		textRefreshNum = (TextView) playView
 				.findViewById(R.id.atext_refresh_num);
 		textTipNum = (TextView) playView.findViewById(R.id.atext_tip_num);
+		textScore = (TextView) playView.findViewById(R.id.tv_score);
 		progress = (ProgressBar) playView.findViewById(R.id.atimer);
 		BoardView.initSound(getActivity());
 		btnRefresh.setOnClickListener(new OnClickListener() {
@@ -127,21 +137,6 @@ public class GameFragment extends Fragment implements Music {
 		super.onResume();
 		startTimer();
 		startMusic();
-	}
-
-	// 启动定时器
-	private void startTimer() {
-		if (timer == null) {
-			timer = new Timer();
-			timer.schedule(getTask(), 0, 1000);
-		}
-	}
-
-	public void stopTimer() {
-		if (timer != null) {
-			timer.cancel();
-			timer = null;
-		}
 	}
 
 	// 设置定时器的任务
@@ -210,6 +205,43 @@ public class GameFragment extends Fragment implements Music {
 
 	public int getLeftTime() {
 		return leftTime;
+	}
+
+	public Timer getTimer() {
+		return timer;
+	}
+
+	@Override
+	public void startTimer() {
+		if (timer == null) {
+			timer = new Timer();
+			timer.schedule(getTask(), 0, 1000);
+		}
+		if (timerScore == null) {
+			timerScore = new Timer();
+			timerScore.schedule(taskScore = new TimerTask() {
+
+				@Override
+				public void run() {
+					new onHelpNumChange().execute(textScore,
+							gameView.getScore());
+					new onGameStateListener().execute(fragment, gameView,
+							GameState, leftTime);
+				}
+			}, 0, 100);
+		}
+	}
+
+	@Override
+	public void stopTimer() {
+		if (timer != null) {
+			timer.cancel();
+			timer = null;
+		}
+		if (timerScore != null) {
+			timerScore.cancel();
+			timerScore = null;
+		}
 	}
 
 }

@@ -1,11 +1,12 @@
 package tk.sdxuyan.game;
 
 import tk.sdxuyan.tool.Contants;
+import tk.sdxuyan.tool.onScoreListener;
 import android.content.Context;
 import android.graphics.Point;
 import android.util.AttributeSet;
 
-public class GameView extends BoardView {
+public class GameView extends BoardView implements onScoreListener {
 
 	public GameView(Context context, AttributeSet set) {
 		super(context, set);
@@ -37,7 +38,6 @@ public class GameView extends BoardView {
 	 * 检测当前是否有能连接的图块
 	 * */
 	public boolean die() {
-		soundPlay.play(Contants.ID_SOUND_ERROR, 0);
 		return check.die(map);
 	}
 
@@ -67,4 +67,8 @@ public class GameView extends BoardView {
 		GameView.this.invalidate();
 		return false;
 	}
+	
+	
+	
+
 }
