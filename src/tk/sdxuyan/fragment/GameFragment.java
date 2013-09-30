@@ -34,6 +34,7 @@ public class GameFragment extends Fragment implements Music, setTimer {
 	private TextView textRefreshNum;
 	private TextView textTipNum;
 	private TextView textScore;
+	private TextView textLevel;
 
 	private MediaPlayer player_play;
 
@@ -42,6 +43,15 @@ public class GameFragment extends Fragment implements Music, setTimer {
 	private int RefreshNum;
 	private int TipNum;
 	private int GameState = Contants.game_isPlaying;// 游戏状态为正在进行游戏
+	private int gameLevel = 1;
+
+	public int getGameLevel() {
+		return gameLevel;
+	}
+
+	public void setGameLevel(int gameLevel) {
+		this.gameLevel = gameLevel;
+	}
 
 	private Timer timer;
 	private Timer timerScore;
@@ -78,6 +88,7 @@ public class GameFragment extends Fragment implements Music, setTimer {
 				.findViewById(R.id.atext_refresh_num);
 		textTipNum = (TextView) playView.findViewById(R.id.atext_tip_num);
 		textScore = (TextView) playView.findViewById(R.id.tv_score);
+		textLevel = (TextView) playView.findViewById(R.id.tv_level);
 		progress = (ProgressBar) playView.findViewById(R.id.atimer);
 		BoardView.initSound(getActivity());
 		btnRefresh.setOnClickListener(new OnClickListener() {
@@ -87,7 +98,8 @@ public class GameFragment extends Fragment implements Music, setTimer {
 				if (RefreshNum > 0) {
 					gameView.change();
 					RefreshNum--;
-					new onHelpNumChange().execute(textRefreshNum, RefreshNum);
+					new onHelpNumChange()
+							.execute(textRefreshNum, RefreshNum, 0);
 				}
 			}
 		});
@@ -98,7 +110,7 @@ public class GameFragment extends Fragment implements Music, setTimer {
 				if (TipNum > 0) {
 					gameView.auto_clear();
 					TipNum--;
-					new onHelpNumChange().execute(textTipNum, TipNum);
+					new onHelpNumChange().execute(textTipNum, TipNum, 0);
 				}
 			}
 		});
@@ -110,8 +122,9 @@ public class GameFragment extends Fragment implements Music, setTimer {
 		leftTime = getTotalTime();
 		RefreshNum = Contants.game_refresh_number;
 		TipNum = Contants.game_tip_number;
-		new onHelpNumChange().execute(textRefreshNum, RefreshNum);
-		new onHelpNumChange().execute(textTipNum, TipNum);
+		new onHelpNumChange().execute(textRefreshNum, RefreshNum, 0);
+		new onHelpNumChange().execute(textTipNum, TipNum, 0);
+		new onHelpNumChange().execute(textLevel, getGameLevel(), 1);
 		progress.setMax(leftTime);
 		progress.setProgress(leftTime);
 		startTimer();
@@ -224,7 +237,7 @@ public class GameFragment extends Fragment implements Music, setTimer {
 				@Override
 				public void run() {
 					new onHelpNumChange().execute(textScore,
-							gameView.getScore());
+							gameView.getScore(), 0);
 					new onGameStateListener().execute(fragment, gameView,
 							GameState, leftTime);
 				}
@@ -244,5 +257,5 @@ public class GameFragment extends Fragment implements Music, setTimer {
 			timerScore = null;
 		}
 	}
-
+	
 }

@@ -5,6 +5,8 @@ import tk.sdxuyan.tool.Contants;
 import tk.sdxuyan.tool.GameDone;
 import tk.sdxuyan.tool.MyDialog;
 import android.R.integer;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 
 public class onGameStateListener extends AsyncTask<Object, Object, integer>
@@ -37,7 +39,7 @@ public class onGameStateListener extends AsyncTask<Object, Object, integer>
 		if (myView.win()) {
 			state = Contants.game_win;
 			GameWin();
-		} else if (leftTime == 0) {
+		} else if (leftTime++ == -1) {
 			state = Contants.game_over;
 			GameOver();
 		} else {
@@ -48,19 +50,37 @@ public class onGameStateListener extends AsyncTask<Object, Object, integer>
 
 	@Override
 	public void GameWin() {
-		new MyDialog(fragment.getActivity(), fragment, "胜利了！",
+		setSharedPreferences();
+		new MyDialog(fragment.getActivity(), myView, fragment, "胜利了！",
 				fragment.getTotalTime() - leftTime).show();
 		fragment.stopMusic();
 		fragment.stopTimer();
+
 	}
 
 	@Override
 	public void GameOver() {
-		new MyDialog(fragment.getActivity(), fragment, "失败！",
+		setSharedPreferences();
+		new MyDialog(fragment.getActivity(), myView, fragment, "你输了！",
 				fragment.getTotalTime() - leftTime).show();
 		BoardView.soundPlay.play(Contants.ID_SOUND_LOSE, 0);
 		fragment.stopMusic();
 		fragment.stopTimer();
+		// Log.i("scorepp", "" + scoreInfo.getInt("score", 1));
+
 	}
 
+	private void setSharedPreferences() {
+		SharedPreferences scoreInfo = fragment.getActivity()
+				.getSharedPreferences("scoreInfo", Context.MODE_PRIVATE);
+		if (scoreInfo.getInt("score", 0) != 0) {
+			int score = scoreInfo.getInt("score", 1);
+			if (myView.getScore() >= score) {
+				scoreInfo.edit().putInt("score", myView.getScore()).commit();
+			}
+		} else {
+			scoreInfo.edit().putInt("score", myView.getScore()).commit();
+		}
+
+	}
 }

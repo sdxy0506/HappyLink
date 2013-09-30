@@ -1115,20 +1115,20 @@ containing a value of this type.
         public static final int abs__textButton=0x7f050018;
         public static final int abs__title=0x7f050020;
         public static final int abs__up=0x7f05000b;
-        public static final int action_settings=0x7f050057;
+        public static final int action_settings=0x7f050058;
         public static final int amyview=0x7f05004c;
-        public static final int aplay_btn=0x7f050054;
+        public static final int aplay_btn=0x7f050055;
         public static final int arefresh_btn=0x7f05004d;
         public static final int atext_refresh_num=0x7f05004e;
         public static final int atext_tip_num=0x7f050050;
         public static final int atimer=0x7f050049;
         public static final int atip_btn=0x7f05004f;
-        public static final int atitle_img=0x7f050055;
+        public static final int atitle_img=0x7f050056;
         public static final int content_frame=0x7f05003f;
         public static final int disableHome=0x7f050009;
         public static final int edit_query=0x7f05002b;
         public static final int fullscreen=0x7f050013;
-        public static final int github=0x7f050058;
+        public static final int github=0x7f050059;
         public static final int homeAsUp=0x7f050006;
         public static final int image=0x7f050046;
         public static final int imageView1=0x7f050048;
@@ -1150,7 +1150,7 @@ containing a value of this type.
         public static final int showCustom=0x7f050008;
         public static final int showHome=0x7f050005;
         public static final int showTitle=0x7f050007;
-        public static final int slidingmenumain=0x7f050053;
+        public static final int slidingmenumain=0x7f050054;
         public static final int tabMode=0x7f050003;
         public static final int text_message=0x7f050041;
         public static final int text_refresh_num=0x7f05003c;
@@ -1161,8 +1161,9 @@ containing a value of this type.
         public static final int title_img=0x7f050038;
         public static final int tv_level=0x7f05004a;
         public static final int tv_score=0x7f05004b;
+        public static final int tv_score_history=0x7f050053;
         public static final int useLogo=0x7f050004;
-        public static final int version=0x7f050056;
+        public static final int version=0x7f050057;
         public static final int view_dialog=0x7f050040;
         public static final int wrap_content=0x7f050000;
     }
@@ -1202,10 +1203,11 @@ containing a value of this type.
         public static final int menu_frame=0x7f03001c;
         public static final int play_game=0x7f03001d;
         public static final int row=0x7f03001e;
-        public static final int sherlock_spinner_dropdown_item=0x7f03001f;
-        public static final int sherlock_spinner_item=0x7f030020;
-        public static final int slidingmenumain=0x7f030021;
-        public static final int welcome=0x7f030022;
+        public static final int score_history=0x7f03001f;
+        public static final int sherlock_spinner_dropdown_item=0x7f030020;
+        public static final int sherlock_spinner_item=0x7f030021;
+        public static final int slidingmenumain=0x7f030022;
+        public static final int welcome=0x7f030023;
     }
     public static final class menu {
         public static final int link=0x7f0d0000;
@@ -1223,8 +1225,8 @@ containing a value of this type.
         public static final int win=0x7f040008;
     }
     public static final class string {
-        public static final int about=0x7f0a002a;
-        public static final int about_msg=0x7f0a002d;
+        public static final int about=0x7f0a002b;
+        public static final int about_msg=0x7f0a002f;
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
          */
         public static final int abs__action_bar_home_description=0x7f0a0000;
@@ -1265,62 +1267,45 @@ containing a value of this type.
          */
         public static final int abs__shareactionprovider_share_with_application=0x7f0a0007;
         public static final int action_settings=0x7f0a000e;
-        public static final int alert_dialog_cancel=0x7f0a0014;
-        public static final int alert_dialog_ok=0x7f0a0013;
-        public static final int anim_fold=0x7f0a001f;
-        public static final int anim_scale=0x7f0a001e;
-        public static final int anim_slide=0x7f0a0020;
-        public static final int anim_zoom=0x7f0a001d;
-        public static final int animations=0x7f0a001c;
-        public static final int apache_license=0x7f0a002e;
+        public static final int alert_dialog_cancel=0x7f0a0015;
+        public static final int alert_dialog_ok=0x7f0a0014;
+        public static final int anim_fold=0x7f0a0020;
+        public static final int anim_scale=0x7f0a001f;
+        public static final int anim_slide=0x7f0a0021;
+        public static final int anim_zoom=0x7f0a001e;
+        public static final int animations=0x7f0a001d;
+        public static final int apache_license=0x7f0a0030;
         public static final int app_name=0x7f0a000d;
-        public static final int attach=0x7f0a0018;
-        public static final int changing_fragments=0x7f0a0021;
-        public static final int contact=0x7f0a002c;
-        public static final int general=0x7f0a0016;
-        public static final int github=0x7f0a0026;
-        public static final int github_label=0x7f0a0027;
+        public static final int attach=0x7f0a0019;
+        public static final int changing_fragments=0x7f0a0022;
+        public static final int contact=0x7f0a002d;
+        public static final int general=0x7f0a0017;
+        public static final int github=0x7f0a0027;
+        public static final int github_label=0x7f0a0028;
         public static final int hello_world=0x7f0a000f;
-        public static final int left=0x7f0a0023;
-        public static final int left_and_right=0x7f0a0025;
-        public static final int licenses=0x7f0a002b;
-        public static final int no_email=0x7f0a002f;
-        public static final int properties=0x7f0a0015;
-        public static final int quit=0x7f0a0011;
-        public static final int responsive_explanation=0x7f0a0029;
-        public static final int responsive_ui=0x7f0a0022;
-        public static final int right=0x7f0a0024;
-        public static final int sure_quit=0x7f0a0012;
+        public static final int left=0x7f0a0024;
+        public static final int left_and_right=0x7f0a0026;
+        public static final int level=0x7f0a0011;
+        public static final int licenses=0x7f0a002c;
+        public static final int max_score=0x7f0a002e;
+        public static final int no_email=0x7f0a0031;
+        public static final int properties=0x7f0a0016;
+        public static final int quit=0x7f0a0012;
+        public static final int responsive_explanation=0x7f0a002a;
+        public static final int responsive_ui=0x7f0a0023;
+        public static final int right=0x7f0a0025;
+        public static final int sure_quit=0x7f0a0013;
         public static final int time=0x7f0a0010;
-        public static final int title_bar=0x7f0a0019;
-        public static final int title_bar_content=0x7f0a001b;
-        public static final int title_bar_slide=0x7f0a001a;
-        public static final int viewpager=0x7f0a0017;
-        public static final int what_is_this=0x7f0a0028;
+        public static final int title_bar=0x7f0a001a;
+        public static final int title_bar_content=0x7f0a001c;
+        public static final int title_bar_slide=0x7f0a001b;
+        public static final int viewpager=0x7f0a0018;
+        public static final int what_is_this=0x7f0a0029;
     }
     public static final class style {
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     
 
             Theme customizations available in newer API levels can go in

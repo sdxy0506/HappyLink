@@ -32,6 +32,14 @@ public class BoardView extends View implements onScoreListener {
 	private int Score = 0;
 	private int singleScore = 10;
 
+	public int getSingleScore() {
+		return singleScore;
+	}
+
+	public void setSingleScore(int singleScore) {
+		this.singleScore = singleScore;
+	}
+
 	/**
 	 * 定义数组的行数和列数
 	 */
@@ -326,5 +334,11 @@ public class BoardView extends View implements onScoreListener {
 	public int getScore() {
 		return Score;
 	}
+
+	public void setScore(int score) {
+		Score = score;
+	}
+	
+	
 
 }

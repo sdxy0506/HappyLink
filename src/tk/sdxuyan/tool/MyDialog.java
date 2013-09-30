@@ -2,6 +2,7 @@ package tk.sdxuyan.tool;
 
 import tk.sdxuyan.fragment.GameFragment;
 import tk.sdxuyan.fragment.WelcomeFragment;
+import tk.sdxuyan.game.GameView;
 import tk.sdxuyan.slidemenudemo.FragmentChangeActivity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -19,12 +20,14 @@ public class MyDialog extends Dialog implements OnClickListener {
 
 	private Context context;
 	private GameFragment fragment;
+	private GameView gameView;
 
-	public MyDialog(Context context, GameFragment gameFragment, String msg,
-			int time) {
+	public MyDialog(Context context, GameView view, GameFragment gameFragment,
+			String msg, int time) {
 		super(context, R.style.dialog);
 		this.context = context;
 		this.fragment = gameFragment;
+		this.gameView = view;
 		this.setContentView(R.layout.dialog);
 		TextView text_msg = (TextView) findViewById(R.id.text_message);
 		TextView text_time = (TextView) findViewById(R.id.text_time);
@@ -44,6 +47,7 @@ public class MyDialog extends Dialog implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		this.dismiss();
+		gameView.setScore(0);
 		switch (v.getId()) {
 		case R.id.menu_imgbtn:
 			Dialog dialog = new AlertDialog.Builder(context)
@@ -79,11 +83,14 @@ public class MyDialog extends Dialog implements OnClickListener {
 			break;
 		case R.id.next_imgbtn:
 			if (fragment.getTotalTime() > 10) {
+				fragment.setGameLevel(fragment.getGameLevel() + 1);
 				fragment.setTotalTime(fragment.getTotalTime() - 10);
+				gameView.setSingleScore(gameView.getSingleScore() + 10);
 				fragment.start();
 				return;
+			} else {
+				fragment.start();
 			}
-			fragment.start();
 			break;
 		}
 	}

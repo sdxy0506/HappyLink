@@ -31,7 +31,7 @@
             android:layout_height="20dip"
             android:layout_marginLeft="5dip"
             android:layout_weight="2"
-            android:text="等级:1"
+            android:text="@string/level"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="#ffffff" />
 
@@ -42,7 +42,6 @@
             android:layout_weight="3"
             android:background="@drawable/bg_goal"
             android:gravity="right"
-            android:text="9000"
             android:textAppearance="?android:attr/textAppearanceSmall" />
     </LinearLayout>
 

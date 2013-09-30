@@ -1,6 +1,6 @@
 package tk.sdxuyan.slidemenudemo;
 
-import tk.sdxuyan.fragment.GameFragment;
+import tk.sdxuyan.fragment.ScoreFragment;
 import tk.sdxuyan.fragment.WelcomeFragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.xuyan.happylink.R;
 
@@ -40,10 +41,10 @@ public class ColorMenuFragment extends ListFragment {
 			newContent = new WelcomeFragment();
 			break;
 		case 1:
-			newContent = new GameFragment();
+			Toast.makeText(getActivity(), "下个版本开放", Toast.LENGTH_SHORT).show();
 			break;
 		case 2:
-			newContent = new ColorFragment(R.color.blue);
+			newContent = new ScoreFragment();
 			break;
 		case 3:
 			newContent = new ColorFragment(android.R.color.white);
