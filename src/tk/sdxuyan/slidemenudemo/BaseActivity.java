@@ -3,6 +3,8 @@ package tk.sdxuyan.slidemenudemo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
+import android.widget.Toast;
+
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
@@ -53,6 +55,9 @@ public class BaseActivity extends SlidingFragmentActivity {
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			toggle();
+			return true;
+		case R.id.github:
+			Toast.makeText(this, "Github", Toast.LENGTH_SHORT).show();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

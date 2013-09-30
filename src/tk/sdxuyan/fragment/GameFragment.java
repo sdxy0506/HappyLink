@@ -219,7 +219,7 @@ public class GameFragment extends Fragment implements Music, setTimer {
 		}
 		if (timerScore == null) {
 			timerScore = new Timer();
-			timerScore.schedule(taskScore = new TimerTask() {
+			taskScore = new TimerTask() {
 
 				@Override
 				public void run() {
@@ -228,7 +228,8 @@ public class GameFragment extends Fragment implements Music, setTimer {
 					new onGameStateListener().execute(fragment, gameView,
 							GameState, leftTime);
 				}
-			}, 0, 100);
+			};
+			timerScore.schedule(taskScore, 0, 100);
 		}
 	}
 
