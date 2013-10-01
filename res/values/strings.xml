@@ -35,6 +35,10 @@
     <string name="licenses">Licenses</string>
     <string name="contact">Contact</string>
     <string name="max_score">最高得分：</string>
+    <string name="author">作者：</string>
+    <string name="author_name">许严</string>
+    <string name="myInformation">目前还是学生，喜欢android端软件的开发，欢迎共同探讨。</string>
+    <string name="contact">如有问题和好的建议可以发送邮件至sdxy0506@gmail.com</string>
     <string name="about_msg">&lt;b>SlidingMenu&lt;/b> is an Open Source Android library 
         that allows developers to easily create applications with sliding menus like those 
         made popular in the Google+, YouTube, and Facebook applications. 

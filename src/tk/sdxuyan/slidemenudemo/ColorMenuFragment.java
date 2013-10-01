@@ -1,5 +1,6 @@
 package tk.sdxuyan.slidemenudemo;
 
+import tk.sdxuyan.fragment.AboutMe;
 import tk.sdxuyan.fragment.ScoreFragment;
 import tk.sdxuyan.fragment.WelcomeFragment;
 import android.os.Bundle;
@@ -47,10 +48,7 @@ public class ColorMenuFragment extends ListFragment {
 			newContent = new ScoreFragment();
 			break;
 		case 3:
-			newContent = new ColorFragment(android.R.color.white);
-			break;
-		case 4:
-			newContent = new ColorFragment(android.R.color.black);
+			newContent = new AboutMe();
 			break;
 		}
 		if (newContent != null)
