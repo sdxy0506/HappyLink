@@ -57,7 +57,7 @@ public class BaseActivity extends SlidingFragmentActivity {
 			toggle();
 			return true;
 		case R.id.github:
-			Toast.makeText(this, "Github", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "有问题请联系：sdxy0506@gmail.com", Toast.LENGTH_SHORT).show();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
