@@ -6,7 +6,7 @@ import java.util.TimerTask;
 import tk.sdxuyan.game.BoardView;
 import tk.sdxuyan.game.GameView;
 import tk.sdxuyan.game.onGameStateListener;
-import tk.sdxuyan.game.onHelpNumChange;
+import tk.sdxuyan.game.onTextViewChange;
 import tk.sdxuyan.tool.Contants;
 import tk.sdxuyan.tool.Music;
 import tk.sdxuyan.tool.setTimer;
@@ -98,8 +98,8 @@ public class GameFragment extends Fragment implements Music, setTimer {
 				if (RefreshNum > 0) {
 					gameView.change();
 					RefreshNum--;
-					new onHelpNumChange()
-							.execute(textRefreshNum, RefreshNum, 0);
+					new onTextViewChange().execute(textRefreshNum, RefreshNum,
+							0);
 				}
 			}
 		});
@@ -110,7 +110,7 @@ public class GameFragment extends Fragment implements Music, setTimer {
 				if (TipNum > 0) {
 					gameView.auto_clear();
 					TipNum--;
-					new onHelpNumChange().execute(textTipNum, TipNum, 0);
+					new onTextViewChange().execute(textTipNum, TipNum, 0);
 				}
 			}
 		});
@@ -122,9 +122,9 @@ public class GameFragment extends Fragment implements Music, setTimer {
 		leftTime = getTotalTime();
 		RefreshNum = Contants.game_refresh_number;
 		TipNum = Contants.game_tip_number;
-		new onHelpNumChange().execute(textRefreshNum, RefreshNum, 0);
-		new onHelpNumChange().execute(textTipNum, TipNum, 0);
-		new onHelpNumChange().execute(textLevel, getGameLevel(), 1);
+		new onTextViewChange().execute(textRefreshNum, RefreshNum, 0);
+		new onTextViewChange().execute(textTipNum, TipNum, 0);
+		new onTextViewChange().execute(textLevel, getGameLevel(), 1);
 		progress.setMax(leftTime);
 		progress.setProgress(leftTime);
 		startTimer();
@@ -236,7 +236,7 @@ public class GameFragment extends Fragment implements Music, setTimer {
 
 				@Override
 				public void run() {
-					new onHelpNumChange().execute(textScore,
+					new onTextViewChange().execute(textScore,
 							gameView.getScore(), 0);
 					new onGameStateListener().execute(fragment, gameView,
 							GameState, leftTime);
@@ -256,6 +256,9 @@ public class GameFragment extends Fragment implements Music, setTimer {
 			timerScore.cancel();
 			timerScore = null;
 		}
+		// gameView.setScore(gameView.getScore() + leftTime
+		// * gameView.getSingleScore() / 10);
+		// new onTextViewChange().execute(textScore, gameView.getScore());
 	}
 
 }

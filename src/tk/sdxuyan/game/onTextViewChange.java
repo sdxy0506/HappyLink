@@ -3,7 +3,7 @@ package tk.sdxuyan.game;
 import android.os.AsyncTask;
 import android.widget.TextView;
 
-public class onHelpNumChange extends AsyncTask<Object, Object, Integer> {
+public class onTextViewChange extends AsyncTask<Object, Object, Integer> {
 
 	private TextView textView;
 	private int count;

@@ -334,7 +334,7 @@ public class BoardView extends View implements onScoreListener {
 	}
 
 	public void setScore(int score) {
-		Score = score;
+		this.Score = score;
 	}
 
 }
